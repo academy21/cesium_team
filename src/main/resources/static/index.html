@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Cesium Container</title>
+    <script src="Cesium/Build/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="Cesium/Apps/Sandcastle/Sandcastle-header.js"></script>
+    <script type="text/javascript" src="Cesium/ThirdParty/requirejs-2.1.20/require.js"></script>
+    <script type="text/javascript">
+        require.config({
+            baseUrl : 'Cesium/Source',
+            waitSeconds : 60
+        });
+    </script>
+    <style>
+        @import url(Cesium/Build/Cesium/Widgets/widgets.css);
+
+        html, body, #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<style>
+    @import url(Cesium/Apps/Sandcastle/templates/bucket.css);
+</style>
+<div id="cesiumContainer" class="fullSize"></div>
+<div id="loadingOverlay"><h1>Loading...</h1></div>
+<div id="toolbar"></div>
+<!--<div id="animation-button" style="position: fixed; top: 80px; left: 10px;">
+    <button type="button" onclick="getBaseLayerList()">Start animation</button>
+    <button type="button" onclick="getArtefactsList()">Get artefacts</button>
+</div>-->
+<script src="js/cesium-overlay.js"></script>
+</body>
+</html>
