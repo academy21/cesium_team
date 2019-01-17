@@ -1,0 +1,126 @@
+body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.flex-parent {
+    color: #d7d7d7;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 170px;
+    bottom: 0px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.flex-parent::-webkit-scrollbar {
+    background: #dfe2cf;
+    width: 12px;
+}
+.flex-parent::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #1d1d1d;
+}
+.flex-parent::-webkit-scrollbar-thumb {
+    background-color: #53a2cb;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%,
+    color-stop(.5, rgba(255, 255, 255, .2)),
+    color-stop(.5, transparent), to(transparent));
+}
+.flex-parent:hover::-webkit-scrollbar {
+    background: rgba(59, 60, 56, 0.88);
+}
+
+.input-flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 2600px;
+    height: 100%;
+    max-width: 5000px;
+    position: absolute;
+    top: 30px;
+    z-index: 0;
+}
+
+.input {
+    width: 25px;
+    height: 25px;
+    background-color: #293f57;
+    position: relative;
+    border-radius: 50%;
+}
+.input:hover {
+    cursor: pointer;
+}
+.input::before, .input::after {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #293f57;
+    width: 4vw;
+    height: 4px;
+    max-width: 10px;
+}
+.input::before {
+    left: calc(-4vw + 35px);
+}
+.input::after {
+    right: calc(-4vw + 35px);
+}
+.input.active {
+    background-color: #293f57;
+}
+.input.active::before {
+    background-color: #293f57;
+}
+.input.active::after {
+    background-color: #AEB6BF;
+}
+.input.active span {
+    font-weight: 700;
+}
+.input.active span::before {
+    font-size: 13px;
+}
+.input.active span::after {
+    font-size: 13px;
+}
+.input.active ~ .input, .input.active ~ .input::before, .input.active ~ .input::after {
+    background-color: #AEB6BF;
+}
+.input span {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+.input span::before, .input span::after {
+    visibility: visible;
+    position: absolute;
+    left: 50%;
+}
+.input span::after {
+    content: attr(data-year);
+    top: 20px;
+    transform: translateX(-50%);
+    font-size: 12px;
+}
+.input span::before {
+    content: attr(data-info);
+    top: -65px;
+    width: 70px;
+    transform: translateX(-5px) rotateZ(-45deg);
+    font-size: 12px;
+    text-indent: -10px;
+}
