@@ -7,17 +7,22 @@ function MyTimeline(layers, times) {
     this.times = times;
 }
 
-MyTimeline.prototype.render = function() {
-    let parent = document.createElement('div');
-    parent.id = 'flex-parent';
-    parent.className = 'flex-parent';
-    document.body.appendChild(parent);
-    let input_container = document.createElement('div');
-    input_container.id = 'input-flex-container';
-    input_container.className = 'input-flex-container';
-    document.getElementById('flex-parent').appendChild(input_container);
+var timesNumber = 6;
+var timesNumberMax = 6;
+var timesNumberMin = 1;
 
-    for (let i = 0; i < this.layers.length; i++) {
+function addTimes(layers, times) {
+    this.layers = layers;
+    this.times = times;
+
+    if (timesNumber > 2){
+        document.getElementById('input-flex-container').style.width = 100 + '%';
+    }
+    else {
+        document.getElementById('input-flex-container').style.width = 60 * (this.layers.length/timesNumber) + 'px';
+    }
+
+    for (let i = 0; i < this.layers.length; i += timesNumber) {
         let input = document.createElement('div');
         input.id = this.layers[i].name;
         input.className = 'input';
@@ -31,6 +36,7 @@ MyTimeline.prototype.render = function() {
     }
 
     let inputs = document.getElementsByClassName('input');
+
     [].slice.call(inputs).forEach(function(item) {
         item.addEventListener('click', function() {
             [].slice.call(inputs).forEach(function(item) {
@@ -44,6 +50,41 @@ MyTimeline.prototype.render = function() {
             }));
         });
     });
+}
+
+MyTimeline.prototype.render = function() {
+    let parent = document.createElement('div');
+    parent.id = 'flex-parent';
+    parent.className = 'flex-parent';
+    document.body.appendChild(parent);
+    let input_container = document.createElement('div');
+    input_container.id = 'input-flex-container';
+    input_container.className = 'input-flex-container';
+    document.getElementById('flex-parent').appendChild(input_container);
+
+    addTimes(this.layers, this.times);
+
+    input_container.onmousewheel = e => {
+        for (let i = 0; i < this.layers.length; i += timesNumber) {
+            document.getElementById(this.layers[i].name).remove();
+        }
+
+        let delta = e.deltaY;
+        if (delta < 0) {
+            timesNumber -= 1;
+            if (timesNumber < timesNumberMin) {
+                timesNumber = timesNumberMin;
+            }
+        }
+        else {
+            timesNumber += 1;
+            if (timesNumber > timesNumberMax) {
+                timesNumber = timesNumberMax;
+            }
+        }
+
+        addTimes(this.layers, this.times);
+    };
 
     parent.onmousedown = () => {
         let pageX = 0;
@@ -61,6 +102,7 @@ MyTimeline.prototype.render = function() {
             return false;
         };
     };
+
 };
 
 function MyTime(time, format) {
