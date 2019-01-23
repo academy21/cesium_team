@@ -27,6 +27,25 @@
             padding: 0;
             overflow: hidden;
         }
+
+        .point-editor {
+            position: absolute;
+            top: 5%;
+            left: 14px;
+            background: rgba(48,51,54,.7);
+            border: 1px solid #444;
+            color: #fff;
+            display: none;
+            padding: 15px;
+        }
+
+        .point-editor__separator {
+            margin: 5px 0;
+        }
+
+        .point-editor__title {
+            margin: 0 0 30px 0;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +55,40 @@
 <div id="cesiumContainer" class="fullSize"></div>
 <div id="loadingOverlay"><h1>Loading...</h1></div>
 <div id="toolbar"></div>
+<div class="point-editor">
+    <h2 id="point-id" class="point-editor__title"></h2>
+    <!--<button id="point-move">Move</button>-->
+    <label>
+        Latitude:
+        <input type="number" min="-90" max="90" id="point-lat" placeholder="From -90 to 90" required />
+    </label>
+    <label>
+        Longitude:
+        <input type="number" min="-180" max="180" id="point-lng" placeholder="From -180 to 180" required />
+    </label>
+    <div class="point-editor__separator"></div>
+    <label>
+        Point size:
+        <input type="number" id="point-width" placeholder="Ex.: 20" required />
+    </label>
+    <label>
+        Point color:
+        <input type="text" id="point-hex-color" placeholder="Input R,G,B,A" required />
+    </label>
+    <div class="point-editor__separator"></div>
+    <label>
+        Border width:
+        <input type="number" id="point-border-width" placeholder="Ex.: 5" required />
+    </label>
+    <label>
+        Border color:
+        <input type="text" id="point-border-hex-color" placeholder="Input R,G,B,A" required />
+    </label>
+    <div class="point-editor__separator"></div>
+    <div class="point-editor__separator"></div>
+    <button id="point-delete">Delete</button>
+    <button id="point-save">Save</button>
+</div>
 <!--<textarea id="myTextarea"></textarea>-->
 <!--<div id="animation-button" style="position: fixed; top: 80px; left: 10px;">
     <button type="button" onclick="getBaseLayerList()">Start animation</button>
@@ -44,5 +97,6 @@
 <script src="js/cesium-overlay.js"></script>
 <script src="js/timeline.js"></script>
 <link rel="stylesheet" href="js/timeline.css">
+<script src="js/markers.js"></script>
 </body>
 </html>
